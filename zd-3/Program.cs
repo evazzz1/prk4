@@ -1,42 +1,43 @@
-﻿// Задача 1: Напишите программу, которая бесконечно
-//запрашивает целые числа с консоли. Программа
-//завершается при вводе символа ‘q’ или при вводе
-//числа, сумма цифр которого четная.
+﻿// Задача 3: Напишите программу, которая перевернёт
+//одномерный массив (первый элемент станет
+//последним, второй – предпоследним и т.д.)
 
-//5 12 16 q [STOP]
-//3 45 342 15 [STOP]
-string text = Console.ReadLine();
+//[1 3 5 6 7 8] => [8 7 6 5 3 1]
 
-int num;
-bool isNum = Int32.TryParse(text, out num);
+int [] myArray = new int [new Random().Next(1,10)];
 
-if (isNum)
+myArray = fillArray(myArray);
+printArray(myArray);
+reverseArray(myArray);
+Console.WriteLine();
+printArray(myArray);
+
+
+int [] reverseArray (int [] myArray)
 {
-    int number = Convert.ToInt32(text);
-    if(IsSumIsOdd(number))
+    int temp = 0;
+    for(int i = 0; i < myArray.Length/2; i++)
     {
-        Console.WriteLine("go");
+        temp = myArray[i];
+        myArray[i] = myArray[myArray.Length-i-1];
+        myArray[myArray.Length-i-1] = temp;
+    }
+    return myArray;
+}
+
+int [] fillArray (int [] myArray)
+{
+    for(int i = 0; i < myArray.Length; i++)
+    {
+        myArray[i] = new Random().Next(0,10);
+    }
+    return myArray;
+} 
+
+void printArray (int [] myArray)
+{
+    foreach (int item in myArray)
+    {
+        Console.Write(item + " ");
     }
 }
-
-
-
-bool IsSumIsOdd (int num)
-{
-int sum = 0;
-while(num > 0)
-{
-    sum += num%10;
-    num /= 10;
-}
-if(sum % 2 == 0)
-{
-    return false; //не работает дальше
-}
-else
-{
-    return true; //работаем дальше
-}
-}
-
-
