@@ -1,32 +1,42 @@
-﻿// Задача 1: Напишите программу, которая бесконечно
-//запрашивает целые числа с консоли. Программа
-//завершается при вводе символа ‘q’ или при вводе
-//числа, сумма цифр которого четная.
+﻿// Задача 2: Задайте массив заполненный случайными
+//трёхзначными числами. Напишите программу,
+//которая покажет количество чётных чисел в
+//массиве.
 
-//5 12 16 q [STOP]
-//3 45 342 15 [STOP]
+// [344 452 341 125] => 2
 
-string text = "lol";
-string text2 = "4";
+int [] myArray = new int [new Random().Next(1,10)];
+myArray = fillArray(myArray);
+printArray(myArray);
+int numOfEven = howManyEven(myArray);
+Console.WriteLine(" => " + numOfEven);
 
-
-
-
-int ToNum (string text)
+int [] fillArray (int [] myArray)
 {
-//if(text == "" && text == null)
-//{
-//    return false;
-//}
-int num;
-bool isNum = Int32.TryParse(text, out num);
-if (isNum)
+    for(int i = 0; i < myArray.Length; i++)
+    {
+        myArray[i] = new Random().Next(100,1000);
+    }
+    return myArray;
+} 
+
+void printArray (int [] myArray)
 {
-    num = Convert.ToInt32(text);
-    return num;
+    foreach (int item in myArray)
+    {
+        Console.Write(item + " ");
+    }
 }
-else
+
+int howManyEven (int [] myArray)
 {
-    return 0;
-}
+    int count = 0;
+    foreach (int item in myArray)
+    {
+        if(item % 2 == 0)
+        {
+            count++;
+        }
+    }
+    return count;
 }
